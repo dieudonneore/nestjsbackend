@@ -3,6 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ContinentSchema } from './schemas/continent.schema';
+import { ContinentService } from './continent/continent.service';
 
 @Module({
   imports: [
@@ -10,6 +11,6 @@ import { ContinentSchema } from './schemas/continent.schema';
     MongooseModule.forFeature([{ name: 'Continent', schema: ContinentSchema }]),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, ContinentService],
 })
 export class AppModule {}
