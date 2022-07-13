@@ -17,7 +17,7 @@ export class ContinentService {
     return newContinent.save();
   }
 
-  async updateStudent(
+  async updateContinentt(
     continentId: string,
     updateContinentDto: UpdateContinentDto,
   ): Promise<IContinent> {
