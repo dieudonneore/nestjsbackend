@@ -27,8 +27,34 @@ export class ContinentService {
       { new: true },
     );
     if (!existingContinent) {
+      throw new NotFoundException(`Continent #${continentId} not found`);
+    }
+    return existingContinent;
+  }
+
+  async getAllContinents(): Promise<IContinent[]> {
+    const continentData = await this.continentModel.find();
+    if (!continentData || continentData.length == 0) {
+      throw new NotFoundException('Continent data not found!');
+    }
+    return continentData;
+  }
+  async getContinent(continentId: string): Promise<IContinent> {
+    const existingContinent = await this.continentModel
+      .findById(continentId)
+      .exec();
+    if (!existingContinent) {
       throw new NotFoundException(`Student #${continentId} not found`);
     }
     return existingContinent;
+  }
+  async deleteContinent(continentId: string): Promise<IContinent> {
+    const deletedContinent = await this.continentModel.findByIdAndDelete(
+      continentId,
+    );
+    if (!deletedContinent) {
+      throw new NotFoundException(`Student #${continentId} not found`);
+    }
+    return deletedContinent;
   }
 }
