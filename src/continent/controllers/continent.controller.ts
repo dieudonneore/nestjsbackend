@@ -50,21 +50,6 @@ export class ContinentController {
     const data = this.continentService.findContinentByFilter(options);
 
     return data;
-    /* const existingContinent = await this.continentService.findContinentByFilter(
-      Code,
-      Name,
-    );
-    return existingContinent; */
-    /* try {
-      const existingContinent =
-        await this.continentService.findContinentByFilter(Code, Name);
-      return response.status(HttpStatus.OK).json({
-        message: 'Continent found successfully',
-        existingContinent,
-      });
-    } catch (err) {
-      return response.status(err.status).json(err.response);
-    } */
   }
 
   @Post()

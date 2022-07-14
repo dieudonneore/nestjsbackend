@@ -9,4 +9,5 @@ export class ContinentDto {
   @MaxLength(30)
   @IsNotEmpty()
   readonly Name: string;
+  readonly translation: [];
 }

@@ -6,5 +6,7 @@ export class Continent {
   Code: string;
   @Prop()
   Name: string;
+  @Prop()
+  translation: [];
 }
 export const ContinentSchema = SchemaFactory.createForClass(Continent);
