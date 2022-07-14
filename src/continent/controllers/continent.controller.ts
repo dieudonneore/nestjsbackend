@@ -7,8 +7,10 @@ import {
   Param,
   Post,
   Put,
+  Req,
   Res,
 } from '@nestjs/common';
+import { Request } from 'express';
 import { ContinentDto } from 'src/dto/continent.dto';
 import { UpdateContinentDto } from 'src/dto/update-continent.dto';
 import { ContinentService } from '../services/continent.service';
@@ -16,6 +18,54 @@ import { ContinentService } from '../services/continent.service';
 @Controller('continent')
 export class ContinentController {
   constructor(private readonly continentService: ContinentService) {}
+
+  @Get('/filterContinent')
+  async filterContinent(@Req() req: Request) {
+    let options = {};
+    const code: any = req.query.code;
+    const name: any = req.query.name;
+    const keyword: any = req.query.keyword;
+
+    if (req.query.code) {
+      options = {
+        $or: [{ Code: new RegExp(code, 'i') }, { Name: new RegExp(code, 'i') }],
+      };
+    }
+
+    if (req.query.name) {
+      options = {
+        $or: [{ Name: new RegExp(name, 'i') }, { Code: new RegExp(name, 'i') }],
+      };
+    }
+
+    if (req.query.keyword) {
+      options = {
+        $or: [
+          { Name: new RegExp(keyword, 'i') },
+          { Code: new RegExp(keyword, 'i') },
+        ],
+      };
+    }
+
+    const data = this.continentService.findContinentByFilter(options);
+
+    return data;
+    /* const existingContinent = await this.continentService.findContinentByFilter(
+      Code,
+      Name,
+    );
+    return existingContinent; */
+    /* try {
+      const existingContinent =
+        await this.continentService.findContinentByFilter(Code, Name);
+      return response.status(HttpStatus.OK).json({
+        message: 'Continent found successfully',
+        existingContinent,
+      });
+    } catch (err) {
+      return response.status(err.status).json(err.response);
+    } */
+  }
 
   @Post()
   async createContinent(

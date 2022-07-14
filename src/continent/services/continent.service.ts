@@ -12,6 +12,11 @@ export class ContinentService {
     private continentModel: Model<IContinent>,
   ) {}
 
+  async findContinentByFilter(options): Promise<IContinent[]> {
+    const continentData = await this.continentModel.find(options).exec();
+    return continentData;
+  }
+
   async createContinent(continentDto: ContinentDto): Promise<IContinent> {
     const newContinent = await new this.continentModel(continentDto);
     return newContinent.save();
