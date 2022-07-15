@@ -28,7 +28,7 @@ export class ContinentController {
 
     if (req.query.code) {
       options = {
-        $or: [{ Code: new RegExp(code, 'i') }, { Name: new RegExp(code, 'i') }],
+        $or: [{ Code: new RegExp(code, 'i') }],
       };
     }
 
