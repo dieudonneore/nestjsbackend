@@ -1,0 +1,13 @@
+{  
+    "_id": {    "$oid": "62cf14ba3725a66f43abb7cb"  },  
+    "Code": "AF",  
+    "Name": "Africa",  
+    "translation": [    
+        {      
+          "language": "fr",      
+          "Code": "AF",     
+          "Name": "Afrique"    
+        }  
+        
+    ]
+}
